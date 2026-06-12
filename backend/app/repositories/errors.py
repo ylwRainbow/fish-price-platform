@@ -1,0 +1,2 @@
+class RepositoryUnavailableError(RuntimeError):
+    pass

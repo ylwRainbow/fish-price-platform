@@ -10,9 +10,10 @@ import os
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 
-from . import data_loader as dl
 from . import repository as repo
 from .api import saved_periods
+from .services import catalog_service, price_service
+from .services.catalog_service import DatabaseUnavailableError
 
 app = FastAPI(title="鱼价数据平台 API", version="0.1.0")
 
@@ -29,11 +30,17 @@ app.include_router(saved_periods.router, prefix="/api", tags=["保存时间段"]
 
 @app.get("/api/fishes")
 def get_fishes(q: str | None = Query(default=None)):
-    return dl.fishes(q)
+    try:
+        return catalog_service.list_fishes(q)
+    except DatabaseUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
 
 @app.get("/api/markets")
 def get_markets(region_code: str | None = Query(default=None)):
-    return dl.markets(region_code)
+    try:
+        return catalog_service.list_markets(region_code)
+    except DatabaseUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
 
 @app.get("/api/prices")
 def get_prices(
@@ -42,18 +49,14 @@ def get_prices(
     start: str | None = None, 
     end: str | None = None, 
     granularity: str = Query(default="day"),
-    lunar_mode: bool = Query(default=False)
+    lunar_mode: bool = Query(default=False),
+    include_unverified: bool = Query(default=False)
 ):
     """
     查询价格数据
     
-    Args:
-        fish_id: 鱼种ID
-        market_id: 市场ID
-        start: 开始日期 (公历格式 YYYY-MM-DD)
-        end: 结束日期 (公历格式 YYYY-MM-DD)
-        granularity: 粒度 (day/week/month)
-        lunar_mode: 是否启用农历模式，返回数据包含农历信息
+    正式查询只读取本地数据库，不触发外部采集或 mock 数据。
+    默认只返回候选可信数据；如需查看待校验数据，显式传 include_unverified=true。
     """
     now = datetime.now().date().isoformat()
     if not start: 
@@ -62,11 +65,24 @@ def get_prices(
         end = now
     if granularity not in ("day","week","month"):
         granularity = "day"
-    res = dl.prices(fish_id, market_id, start, end, granularity, lunar_mode)
+    try:
+        res = price_service.query_prices(
+            fish_id=fish_id,
+            market_id=market_id,
+            start=start,
+            end=end,
+            granularity=granularity,
+            lunar_mode=lunar_mode,
+            include_unverified=include_unverified,
+        )
+    except DatabaseUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
     return JSONResponse(res)
 
 @app.get("/api/forecast")
 def get_forecast(fish_id: int, market_id: int, horizon: int = Query(default=14)):
+    from . import data_loader as dl
+
     res = dl.forecast(fish_id, market_id, horizon)
     return JSONResponse(res)
 
@@ -123,25 +139,17 @@ def add_prices_batch(data: BatchPriceInput):
 
 @app.get("/api/fishes/list")
 def list_fishes():
-    from .db import get_conn
-    conn = get_conn()
-    if not conn:
-        return []
-    with conn.cursor() as cur:
-        cur.execute("SELECT id, name, alias, species_code FROM fishes ORDER BY id")
-        rows = cur.fetchall()
-    return [{"id": r[0], "name": r[1], "alias": r[2], "species_code": r[3]} for r in rows]
+    try:
+        return catalog_service.list_fishes()
+    except DatabaseUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
 
 @app.get("/api/markets/list")
 def list_markets():
-    from .db import get_conn
-    conn = get_conn()
-    if not conn:
-        return []
-    with conn.cursor() as cur:
-        cur.execute("SELECT id, name, region_code, source_code FROM markets ORDER BY id")
-        rows = cur.fetchall()
-    return [{"id": r[0], "name": r[1], "region_code": r[2], "source_code": r[3]} for r in rows]
+    try:
+        return catalog_service.list_markets()
+    except DatabaseUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
 
 @app.get("/api/templates/prices.xlsx")
 def download_excel_template():

@@ -142,9 +142,9 @@ import * as echarts from 'echarts'
 import { Solar, Lunar } from 'lunar-javascript'
 import { Plus, Delete, Search, Refresh, Check, Download, FolderAdd, FolderOpened } from '@element-plus/icons-vue'
 import axios from 'axios'
-import yaml from 'js-yaml'
 import LunarDatePicker from '@/components/LunarDatePicker.vue'
 import SavedPeriods from '@/components/SavedPeriods.vue'
+import { getFishes, getMarkets } from '@/api'
 
 const chartRef = ref(null)
 let chartInstance = null
@@ -299,17 +299,19 @@ const colors = [
 ]
 
 /**
- * 加载配置文件
+ * 加载后端目录数据
  */
 async function loadConfig() {
   try {
-    const response = await axios.get('/config.yaml')
-    const config = yaml.load(response.data)
-    markets.value = config.markets || []
-    fishes.value = config.fishes || []
-    console.log('配置加载成功:', { markets: markets.value, fishes: fishes.value })
+    const [marketData, fishData] = await Promise.all([
+      getMarkets(),
+      getFishes()
+    ])
+    markets.value = marketData || []
+    fishes.value = fishData || []
   } catch (error) {
-    console.error('加载配置失败:', error)
+    console.error('加载目录数据失败:', error)
+    ElMessage.error('目录数据加载失败，请检查后端和数据库连接')
   }
 }
 
