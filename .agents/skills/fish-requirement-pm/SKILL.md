@@ -1,6 +1,6 @@
 ---
 name: fish-requirement-pm
-description: Senior product-manager requirement clarification workflow for fish-price-platform. Use when the user proposes a new requirement, feature, refactor, workflow change, data change, UI change, API change, database change, import/crawler change, chart behavior, or any implementation request in the fish price platform. Before coding, use AskUserQuestion when available to clarify scope, success criteria, data/API/database impacts, and edge cases.
+description: Senior product-manager requirement clarification and plan-before-code workflow for fish-price-platform. Use when the user proposes a new requirement, feature, refactor, workflow change, data change, UI change, API change, database change, import/crawler change, chart behavior, or any implementation request in the fish price platform. Before coding, read relevant files, use AskUserQuestion when available, clarify scope and acceptance criteria, present understanding/plan/risks/validation, and wait for user confirmation.
 ---
 
 # Fish Requirement PM
@@ -11,18 +11,22 @@ For any new fish-price-platform requirement, do not start implementation immedia
 
 Use `AskUserQuestion` when that tool is available. If the current environment exposes only a different user-question tool, use that equivalent. If no such tool is available, ask concise clarification questions directly in chat and wait for the answer before coding, unless the user explicitly says to proceed without clarification.
 
+Treat "do it", "refactor this", "add a feature", and similarly broad requests as analysis-first requests. Do not edit files until the user confirms the plan, unless the user explicitly says to skip clarification and implement directly.
+
 ## Product Analysis Workflow
 
 1. Restate the requirement in one sentence.
-2. Identify the affected surfaces:
+2. Read the relevant files before proposing the implementation. Include system-deposit docs, frontend pages/components, backend APIs/services/repositories, schema/migrations, and local data notes as applicable.
+3. Identify the affected surfaces:
    - frontend pages/components
    - backend APIs/services/repositories
    - database tables/fields/data quality
    - import/crawler/task flows
    - docs/system-deposit updates
-3. Ask only the highest-value questions needed to remove ambiguity.
-4. Convert answers into acceptance criteria.
-5. Then implement with frontend, backend, and database aligned end to end.
+4. Ask only the highest-value questions needed to remove ambiguity.
+5. Convert answers into acceptance criteria.
+6. Present the plan and wait for confirmation.
+7. Then implement with frontend, backend, and database aligned end to end.
 
 ## Required Clarification Topics
 
@@ -51,12 +55,28 @@ Recommended patterns:
 
 ## Output Before Implementation
 
-Before making code changes, provide a short PM-style alignment summary:
+Before making code changes, provide a PM-style alignment summary and wait for user confirmation:
 
-- Goal
-- In scope
-- Out of scope
-- Acceptance criteria
-- Assumptions
+- My understanding
+- Relevant files read
+- Frontend impact
+- Backend impact
+- Database/data impact
+- Modification plan
+- Risks
+- Validation method
+- Questions or assumptions
 
-Keep it concise. After the user answers, execute the implementation and verify it end to end.
+If the user confirms, implement. If the user changes scope, update the plan first.
+
+## Confirmation Gate
+
+Do not call file-edit tools before confirmation for new requirements. Reading files, searching, database read-only checks, and drafting a plan are allowed.
+
+The confirmation gate can be skipped only when the user explicitly says something like:
+
+- "直接实现"
+- "不用问，按你判断做"
+- "跳过确认"
+
+Even when skipping confirmation, still keep frontend, backend, and database behavior aligned and verify end to end.
