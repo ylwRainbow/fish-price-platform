@@ -90,18 +90,18 @@ frontend/src/components/SavedPeriods.vue  保存时间段弹窗和事件桥接
 
 - `/api/prices` 写入单条价格。
 - `/api/prices/batch` 批量写入价格。
-- `/api/import/excel` 解析 Excel 后写入价格。
-- CSV 导入目前主要由前端解析，再调用批量写入接口。
+- `/api/import/prices` 解析 Excel/CSV 后写入价格。
+- `/api/import/excel` 作为 Excel 兼容路径，内部复用统一文件导入逻辑。
 
 问题：导入批次、原始文件、失败明细、数据校验结果没有统一持久化。
 
 已验证细节：
 
 - `PriceInput.unit` 默认是 `kg`。
-- 前端录入页文案显示“价格 (元/斤)”。
+- 前端录入页、手工批量录入和图表查询已显式选择 `unit`。
 - Excel/CSV 模板中的单位示例为 `kg`。
 
-结论：单位口径当前不一致，不能直接假设库中价格就是元/斤或元/kg。
+结论：新增/查询链路已显式传递单位；历史数据仍存在 `kg` 和 `斤` 混合，不能直接假设库中全量价格已标准化。
 
 ### 保存时间段
 
@@ -135,9 +135,9 @@ frontend/src/components/SavedPeriods.vue  保存时间段弹窗和事件桥接
 
 已验证细节：
 
-- 图表页支持多选市场和多选鱼种的 UI。
-- 实际请求时只取 `selectedMarkets.value[0]` 和 `selectedFishes.value[0]`。
-- 图表页直接用 `axios.get('/config.yaml')` 加载前端静态目录配置。
+- 图表页当前收敛为单市场、单鱼种查询，和 `/api/prices` 的单组合接口能力一致。
+- 图表页通过统一 API client 调用后端目录和价格接口。
+- 图表页支持显式选择 `price_type` 和 `unit`，避免混合单位直接聚合。
 
 ### 录入页和导入页
 

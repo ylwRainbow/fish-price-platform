@@ -48,9 +48,9 @@
 
 | 文件 | 当前职责 | 已验证事实 | 重构关注点 |
 | --- | --- | --- | --- |
-| `frontend/src/views/ChartView.vue` | 图表主页面 | 超过 1200 行；目录已改为通过后端 API 获取；多选 UI 只取第一个鱼种/市场请求 | 优先拆请求、时间段、图表配置；收敛多选 UI 和实际查询能力 |
-| `frontend/src/views/EntryView.vue` | 单条和快速录入 | 文案为“元/斤”，提交默认可使用后端 `unit=kg` | 单位口径需统一 |
-| `frontend/src/views/ImportView.vue` | Excel/CSV/手工批量导入 | Excel 走后端，CSV 在前端 `split(',')` 后批量提交 | CSV 移到后端解析 |
+| `frontend/src/views/ChartView.vue` | 图表主页面 | 超过 1200 行；目录已改为通过后端 API 获取；筛选已收敛为单市场、单鱼种、价格类型、单位 | 优先拆请求、时间段、图表配置；后续如要多选需先扩展后端返回结构 |
+| `frontend/src/views/EntryView.vue` | 单条和快速录入 | 提交时已显式选择并传递 `unit` | 仍需把价格单位、规格和来源校验规则服务化 |
+| `frontend/src/views/ImportView.vue` | Excel/CSV/手工批量导入 | Excel 和 CSV 文件都走后端 `/api/import/prices`；手工批量录入已传 `unit` | 后续新增导入批次表，错误明细持久化 |
 | `frontend/src/components/SavedPeriods.vue` | 保存时间段弹窗 | 使用 window event 和 fetch；删除组合缺少 `type` query | 改为 props/emits 或 store；修复契约 |
 | `frontend/src/components/LunarDatePicker.vue` | 农历日期选择 | 图表页农历模式使用 | 与后端农历口径同步 |
 

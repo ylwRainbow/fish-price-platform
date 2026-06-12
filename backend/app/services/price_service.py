@@ -15,6 +15,7 @@ def query_prices(
     end: str,
     granularity: str = "day",
     price_type: str = "pond",
+    unit: str | None = "kg",
     lunar_mode: bool = False,
     include_unverified: bool = False,
 ) -> dict[str, Any]:
@@ -31,6 +32,7 @@ def query_prices(
             end=end,
             granularity=granularity,
             price_type=price_type,
+            unit=unit,
             trusted_only=not include_unverified,
         )
     except RepositoryUnavailableError as exc:
@@ -46,6 +48,7 @@ def query_prices(
         "meta": {
             "granularity": granularity,
             "price_type": price_type,
+            "unit": unit,
             "include_unverified": include_unverified,
             "query_mode": "database_only",
         },

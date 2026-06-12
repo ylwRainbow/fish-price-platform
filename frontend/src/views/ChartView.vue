@@ -9,14 +9,14 @@
       <div class="filter-row">
         <div class="filter-group">
           <label class="filter-label">市场</label>
-          <el-select v-model="selectedMarkets" multiple collapse-tags collapse-tags-tooltip 
+          <el-select v-model="selectedMarket"
             placeholder="选择市场" class="filter-select" style="width: 280px">
             <el-option v-for="market in markets" :key="market.id" :label="market.name" :value="market.id" />
           </el-select>
         </div>
         <div class="filter-group">
           <label class="filter-label">品种</label>
-          <el-select v-model="selectedFishes" multiple collapse-tags collapse-tags-tooltip 
+          <el-select v-model="selectedFish"
             placeholder="选择品种" class="filter-select" style="width: 200px">
             <el-option v-for="fish in fishes" :key="fish.id" :label="fish.name" :value="fish.id" />
           </el-select>
@@ -27,6 +27,21 @@
             <el-radio-button value="solar">公历</el-radio-button>
             <el-radio-button value="lunar">农历</el-radio-button>
           </el-radio-group>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">价格类型</label>
+          <el-select v-model="selectedPriceType" class="filter-select" style="width: 120px">
+            <el-option label="塘口价" value="pond" />
+            <el-option label="批发价" value="wholesale" />
+            <el-option label="零售价" value="retail" />
+          </el-select>
+        </div>
+        <div class="filter-group">
+          <label class="filter-label">单位</label>
+          <el-select v-model="selectedUnit" class="filter-select" style="width: 110px">
+            <el-option label="元/kg" value="kg" />
+            <el-option label="元/斤" value="斤" />
+          </el-select>
         </div>
       </div>
 
@@ -141,17 +156,18 @@ import { ElMessage } from 'element-plus'
 import * as echarts from 'echarts'
 import { Solar, Lunar } from 'lunar-javascript'
 import { Plus, Delete, Search, Refresh, Check, Download, FolderAdd, FolderOpened } from '@element-plus/icons-vue'
-import axios from 'axios'
 import LunarDatePicker from '@/components/LunarDatePicker.vue'
 import SavedPeriods from '@/components/SavedPeriods.vue'
-import { getFishes, getMarkets } from '@/api'
+import { getFishes, getMarkets, getPrices } from '@/api'
 
 const chartRef = ref(null)
 let chartInstance = null
 
 const loading = ref(false)
-const selectedMarkets = ref([])
-const selectedFishes = ref([])
+const selectedMarket = ref(null)
+const selectedFish = ref(null)
+const selectedPriceType = ref('pond')
+const selectedUnit = ref('kg')
 const calendarType = ref('solar')
 const timePeriods = ref([
   { name: '线条1', start: '', end: '' }
@@ -162,6 +178,7 @@ const fishes = ref([])
 const selectedSeriesCount = ref(0)
 const allSeriesData = ref([]) // 存储所有系列的完整数据
 const seriesVisibility = ref({}) // 存储每个系列的显示状态 {0: true, 1: false, ...}
+const chartUnit = ref('kg')
 
 // 当前选中的时间段（用于保存功能）
 const currentTimePeriod = computed(() => {
@@ -389,11 +406,14 @@ function setQuickPeriod(index, type) {
  * 重置筛选条件
  */
 function resetFilters() {
-  selectedMarkets.value = []
-  selectedFishes.value = []
+  selectedMarket.value = null
+  selectedFish.value = null
+  selectedPriceType.value = 'pond'
+  selectedUnit.value = 'kg'
   calendarType.value = 'solar'
   timePeriods.value = [{ start: '', end: '' }]
   chartSeries.value = []
+  chartUnit.value = 'kg'
   if (chartInstance) {
     chartInstance.clear()
   }
@@ -438,12 +458,14 @@ function extractMonthDay(dateStr) {
  * 获取数据
  */
 async function fetchData() {
-  if (selectedMarkets.value.length === 0 || selectedFishes.value.length === 0) {
+  if (!selectedMarket.value || !selectedFish.value) {
+    ElMessage.warning('请先选择市场和品种')
     return
   }
   
   const validPeriods = timePeriods.value.filter(p => p.start && p.end)
   if (validPeriods.length === 0) {
+    ElMessage.warning('请至少设置一个有效时间段')
     return
   }
   
@@ -467,19 +489,19 @@ async function fetchData() {
       const periodName = period.name || `${startYear}年`
       
       try {
-        const marketId = selectedMarkets.value[0]
-        const fishId = selectedFishes.value[0]
+        const marketId = selectedMarket.value
+        const fishId = selectedFish.value
         
-        const response = await axios.get('/api/prices', {
-          params: {
-            market_id: marketId,
-            fish_id: fishId,
-            start: startDate,
-            end: endDate
-          }
+        const response = await getPrices({
+          market_id: marketId,
+          fish_id: fishId,
+          start: startDate,
+          end: endDate,
+          price_type: selectedPriceType.value,
+          unit: selectedUnit.value
         })
         
-        const rawData = response.data.points || []
+        const rawData = response.points || []
         const data = rawData.map(p => {
           const dateStr = p.ts.split('T')[0]
           const monthDay = extractMonthDay(dateStr)
@@ -503,11 +525,14 @@ async function fetchData() {
             monthDay: monthDay,
             year: year,
             label: label,
-            price: p.price
+            price: p.price,
+            unit: p.unit || response.market?.unit || 'kg',
+            dataTrust: p.data_trust
           }
         })
         
         if (data.length > 0) {
+          chartUnit.value = data[0].unit || chartUnit.value
           seriesData.push({
             name: periodName,
             year: startYear,
@@ -518,6 +543,7 @@ async function fetchData() {
         }
       } catch (e) {
         console.error('获取数据失败:', e)
+        ElMessage.error(`获取 ${periodName} 数据失败：${e.message}`)
       }
     }
     
@@ -531,6 +557,7 @@ async function fetchData() {
     renderChart()
   } catch (error) {
     console.error('查询失败:', error)
+    ElMessage.error(`查询失败：${error.message}`)
   } finally {
     loading.value = false
   }
@@ -624,7 +651,7 @@ function formatSingleTooltip(param) {
     <div style="font-weight:bold;margin-bottom:8px;font-size:14px;">📊 ${seriesName}</div>
     <div style="margin-bottom:4px;">日期：<strong>${solarDisplay}</strong>（阳历）</div>
     <div style="margin-bottom:4px; margin-left: 40px;"><strong>${lunarDisplay}</strong>（农历）</div>
-    <div style="margin-bottom:4px;">价格：<strong style="color:#ffd700">${price}</strong> 元/斤</div>
+    <div style="margin-bottom:4px;">价格：<strong style="color:#ffd700">${price}</strong> 元/${chartUnit.value}</div>
   `.trim()
 }
 
@@ -664,7 +691,7 @@ function formatMultiTooltip(params) {
         <div style="margin-bottom:6px;padding:4px;background:rgba(255,255,255,0.05);border-radius:3px;">
           <div style="margin-bottom:3px;"><span style="color:${p.color}">●</span> <strong>${seriesName}</strong></div>
           <div style="font-size:11px;color:#a0a0a0;margin-bottom:2px;padding-left:16px;">阳历：${solarDisplay} | 农历：${lunarDisplay}</div>
-          <div style="padding-left:16px;">价格：<strong style="color:#ffd700">${price}</strong> 元/斤</div>
+          <div style="padding-left:16px;">价格：<strong style="color:#ffd700">${price}</strong> 元/${chartUnit.value}</div>
         </div>
       `.trim()
     }
@@ -864,7 +891,7 @@ function renderChart() {
     },
     yAxis: {
       type: 'value',
-      name: '价格 (元/斤)',
+      name: `价格 (元/${chartUnit.value})`,
       nameTextStyle: { color: '#a0a0a0', fontSize: 12 },
       axisLine: { lineStyle: { color: 'rgba(0, 247, 255, 0.3)' } },
       axisLabel: { color: '#a0a0a0', fontSize: 11 },

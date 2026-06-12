@@ -51,7 +51,7 @@
                 </el-select>
               </div>
               <div class="form-item">
-                <label class="form-label">价格 (元/斤) // PRICE</label>
+                <label class="form-label">价格 // PRICE</label>
                 <el-input-number
                   v-model="form.price"
                   :precision="2"
@@ -59,6 +59,13 @@
                   placeholder="输入价格"
                   class="cyber-input-number"
                 />
+              </div>
+              <div class="form-item">
+                <label class="form-label">单位 // UNIT</label>
+                <el-select v-model="form.unit" placeholder="选择单位" class="cyber-select">
+                  <el-option label="元/kg" value="kg" />
+                  <el-option label="元/斤" value="斤" />
+                </el-select>
               </div>
               <div class="form-item">
                 <label class="form-label">日期 // DATE</label>
@@ -73,17 +80,20 @@
               <div class="form-item">
                 <label class="form-label">价格类型 // TYPE</label>
                 <div class="cyber-radio-group">
-                  <button 
+                  <button
+                    type="button"
                     class="cyber-radio" 
                     :class="{ active: form.price_type === 'pond' }"
                     @click="form.price_type = 'pond'"
                   >塘口价</button>
-                  <button 
+                  <button
+                    type="button"
                     class="cyber-radio" 
                     :class="{ active: form.price_type === 'wholesale' }"
                     @click="form.price_type = 'wholesale'"
                   >批发价</button>
-                  <button 
+                  <button
+                    type="button"
                     class="cyber-radio" 
                     :class="{ active: form.price_type === 'retail' }"
                     @click="form.price_type = 'retail'"
@@ -123,7 +133,7 @@
                 <span class="recent-name">{{ record.fishName }} - {{ record.marketName }}</span>
                 <span class="recent-date">{{ record.ts }}</span>
               </div>
-              <div class="recent-price">{{ record.price.toFixed(2) }}</div>
+              <div class="recent-price">{{ record.price.toFixed(2) }} 元/{{ record.unit }}</div>
             </div>
           </div>
           <div v-else class="empty-state">
@@ -164,6 +174,10 @@
               placeholder="价格"
               class="quick-price"
             />
+            <el-select v-model="quickEntry[fish.id].unit" size="small" class="quick-select">
+              <el-option label="元/kg" value="kg" />
+              <el-option label="元/斤" value="斤" />
+            </el-select>
             <el-date-picker
               v-model="quickEntry[fish.id].ts"
               type="date"
@@ -204,6 +218,7 @@ const form = reactive({
   fish_id: null,
   market_id: null,
   price: null,
+  unit: 'kg',
   ts: new Date().toISOString().slice(0, 10),
   price_type: 'pond',
   source_url: ''
@@ -213,6 +228,7 @@ const rules = {
   fish_id: [{ required: true, message: '请选择鱼种', trigger: 'change' }],
   market_id: [{ required: true, message: '请选择市场', trigger: 'change' }],
   price: [{ required: true, message: '请输入价格', trigger: 'blur' }],
+  unit: [{ required: true, message: '请选择单位', trigger: 'change' }],
   ts: [{ required: true, message: '请选择日期', trigger: 'change' }]
 }
 
@@ -225,6 +241,7 @@ watch(() => catalogStore.fishes, (fishes) => {
         quickEntry[fish.id] = {
           market_id: catalogStore.markets[0]?.id || null,
           price: null,
+          unit: 'kg',
           ts: new Date().toISOString().slice(0, 10),
           loading: false,
           saved: false
@@ -254,6 +271,7 @@ async function handleSubmit() {
         fishName: fish?.name,
         marketName: market?.name,
         price: form.price,
+        unit: form.unit,
         ts: form.ts
       })
       
@@ -278,6 +296,7 @@ async function handleSubmit() {
 function resetForm() {
   formRef.value?.resetFields()
   form.price = null
+  form.unit = 'kg'
   form.source_url = ''
   form.ts = new Date().toISOString().slice(0, 10)
 }
@@ -299,6 +318,7 @@ async function saveQuickEntry(fishId) {
       fish_id: fishId,
       market_id: entry.market_id,
       price: entry.price,
+      unit: entry.unit,
       ts: entry.ts
     })
     if (result.success) {

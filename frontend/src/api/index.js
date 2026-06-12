@@ -1,19 +1,27 @@
 const API_BASE = '/api'
 
+async function parseResponse(res) {
+  const data = await res.json().catch(() => ({}))
+  if (!res.ok) {
+    throw new Error(data.detail || data.message || `HTTP ${res.status}`)
+  }
+  return data
+}
+
 export async function getFishes() {
   const res = await fetch(`${API_BASE}/fishes/list`)
-  return res.json()
+  return parseResponse(res)
 }
 
 export async function getMarkets() {
   const res = await fetch(`${API_BASE}/markets/list`)
-  return res.json()
+  return parseResponse(res)
 }
 
 export async function getPrices(params) {
   const query = new URLSearchParams(params)
   const res = await fetch(`${API_BASE}/prices?${query}`)
-  return res.json()
+  return parseResponse(res)
 }
 
 export async function addPrice(data) {
@@ -22,7 +30,7 @@ export async function addPrice(data) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
-  return res.json()
+  return parseResponse(res)
 }
 
 export async function addPricesBatch(prices) {
@@ -31,17 +39,21 @@ export async function addPricesBatch(prices) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ prices })
   })
-  return res.json()
+  return parseResponse(res)
 }
 
-export async function importExcel(file) {
+export async function importPriceFile(file) {
   const formData = new FormData()
   formData.append('file', file)
-  const res = await fetch(`${API_BASE}/import/excel`, {
+  const res = await fetch(`${API_BASE}/import/prices`, {
     method: 'POST',
     body: formData
   })
-  return res.json()
+  return parseResponse(res)
+}
+
+export async function importExcel(file) {
+  return importPriceFile(file)
 }
 
 export function getExcelTemplateUrl() {

@@ -196,8 +196,8 @@
 当前状态：
 
 - 当前没有导入批次表。
-- Excel 导入只返回 `added`、`failed` 和最多 10 条错误。
-- CSV 主要由前端解析后调用 `/api/prices/batch`。
+- Excel/CSV 文件导入统一走 `/api/import/prices`，返回 `added`、`failed` 和最多 10 条错误。
+- CSV 已由后端解析，但错误明细仍未持久化。
 
 ### CollectionTask
 

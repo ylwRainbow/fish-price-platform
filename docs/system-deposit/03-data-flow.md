@@ -85,17 +85,17 @@ Upload file
 
 ```text
 ImportView.vue
-  -> 前端 split(',')
-  -> POST /api/prices/batch
+  -> POST /api/import/prices
+  -> 后端 csv.reader 解析和行级校验
   -> MySQL prices
 ```
 
 现状问题：
 
-- CSV 解析在前端，无法可靠处理逗号、引号、编码和错误行。
-- 后端无法保留原始行级错误。
+- CSV 已改为后端解析，接口响应返回行级错误。
+- 当前仍没有导入批次表，行级错误没有持久化。
 
-目标方向：CSV 和 Excel 一样走后端导入服务。
+目标方向：增加导入批次表，持久化原始文件、成功/失败数量和错误明细。
 
 ### 采集数据流
 

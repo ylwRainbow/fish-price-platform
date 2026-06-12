@@ -20,7 +20,7 @@
         </div>
         <div class="upload-section">
           <p class="upload-desc">
-            支持 Excel (.xlsx, .xls) 和 CSV 文件批量导入历史价格数据
+            支持 Excel (.xlsx, .xls) 和 CSV 文件，统一由后端解析并校验
           </p>
           <div class="code-block">
             <div class="code-header">
@@ -121,6 +121,7 @@
               <th>鱼种</th>
               <th>市场</th>
               <th>价格</th>
+              <th>单位</th>
               <th>日期</th>
               <th>类型</th>
               <th>操作</th>
@@ -157,6 +158,12 @@
                   placeholder="价格"
                   class="table-input"
                 />
+              </td>
+              <td>
+                <el-select v-model="row.unit" size="small" class="table-select small">
+                  <el-option label="元/kg" value="kg" />
+                  <el-option label="元/斤" value="斤" />
+                </el-select>
               </td>
               <td>
                 <el-date-picker
@@ -201,7 +208,7 @@
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
 import { useCatalogStore } from '@/stores/catalog'
-import { addPricesBatch, importExcel, getExcelTemplateUrl, getCSVTemplateUrl } from '@/api'
+import { addPricesBatch, importPriceFile, getExcelTemplateUrl, getCSVTemplateUrl } from '@/api'
 
 const catalogStore = useCatalogStore()
 
@@ -221,6 +228,7 @@ function addRow() {
     fish_id: catalogStore.fishes[0]?.id || null,
     market_id: catalogStore.markets[0]?.id || null,
     price: null,
+    unit: 'kg',
     ts: new Date().toISOString().slice(0, 10),
     price_type: 'pond'
   })
@@ -255,51 +263,10 @@ async function handleUpload() {
   try {
     const fileName = selectedFile.value.name.toLowerCase()
     
-    if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls')) {
-      const result = await importExcel(selectedFile.value)
+    if (fileName.endsWith('.xlsx') || fileName.endsWith('.xls') || fileName.endsWith('.csv')) {
+      const result = await importPriceFile(selectedFile.value)
       importResult.value = result
-      ElMessage.success(`Excel导入完成：成功 ${result.added} 条，失败 ${result.failed} 条`)
-    } else if (fileName.endsWith('.csv')) {
-      const text = await selectedFile.value.text()
-      const lines = text.split('\n').filter(line => line.trim())
-      
-      if (lines.length < 2) {
-        ElMessage.error('CSV文件格式错误或无数据')
-        return
-      }
-
-      const prices = []
-      for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',')
-        if (values.length < 4) continue
-
-        const fishName = values[0]?.trim()
-        const marketName = values[1]?.trim()
-        const price = parseFloat(values[2])
-        const ts = values[3]?.trim()
-
-        const fish = catalogStore.fishes.find(f => f.name === fishName)
-        const market = catalogStore.markets.find(m => m.name === marketName)
-
-        if (fish && market && price && ts) {
-          prices.push({
-            fish_id: fish.id,
-            market_id: market.id,
-            price,
-            ts,
-            price_type: values[6]?.trim() || 'pond'
-          })
-        }
-      }
-
-      if (prices.length === 0) {
-        ElMessage.error('没有有效的数据行')
-        return
-      }
-
-      const result = await addPricesBatch(prices)
-      importResult.value = result
-      ElMessage.success(`CSV导入完成：成功 ${result.added} 条，失败 ${result.failed} 条`)
+      ElMessage.success(`导入完成：成功 ${result.added} 条，失败 ${result.failed} 条`)
     } else {
       ElMessage.error('不支持的文件格式，请上传 Excel 或 CSV 文件')
     }
@@ -332,7 +299,7 @@ function downloadCSVTemplate() {
  */
 async function submitBatch() {
   const validData = batchData.value.filter(row => 
-    row.fish_id && row.market_id && row.price && row.ts
+    row.fish_id && row.market_id && row.price && row.unit && row.ts
   )
 
   if (validData.length === 0) {

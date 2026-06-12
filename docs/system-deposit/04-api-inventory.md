@@ -49,14 +49,15 @@
 | Method | Path | 当前用途 | 风险 |
 | --- | --- | --- | --- |
 | GET | `/api/templates/prices.xlsx` | 下载 Excel 模板 | 模板字段和真实模型可能不一致 |
-| GET | `/api/templates/prices.csv` | 下载 CSV 模板 | CSV 后端没有统一导入接口 |
-| POST | `/api/import/excel` | Excel 导入 | 解析逻辑在 `main.py`，缺少批次表 |
+| GET | `/api/templates/prices.csv` | 下载 CSV 模板 | 模板字段和目标模型仍需随单位/规格口径演进 |
+| POST | `/api/import/prices` | Excel/CSV 文件导入 | 解析逻辑仍在 `main.py`，缺少批次表 |
+| POST | `/api/import/excel` | Excel 导入兼容路径 | 内部复用统一文件导入逻辑，后续可标记 deprecated |
 
 建议目标：
 
 - `POST /api/imports` 创建导入批次。
 - `GET /api/imports/{id}` 查询导入结果。
-- Excel 和 CSV 都由后端解析。
+- Excel 和 CSV 已先统一为后端解析，下一步应补导入批次和错误明细持久化。
 
 ## 保存时间段接口
 

@@ -11,6 +11,7 @@ def query_price_points(
     end: str,
     granularity: str = "day",
     price_type: str = "pond",
+    unit: str | None = "kg",
     trusted_only: bool = True,
 ) -> list[dict[str, Any]]:
     conn = get_conn()
@@ -20,6 +21,12 @@ def query_price_points(
     trust_filter = ""
     if trusted_only:
         trust_filter = " AND m.source_code = 'MZYY_WECHAT'"
+
+    unit_filter = ""
+    params: list[Any] = [fish_id, market_id, start, end, price_type]
+    if unit:
+        unit_filter = " AND p.unit = %s"
+        params.append(unit)
 
     if granularity == "day":
         bucket_sql = "DATE(p.ts)"
@@ -46,11 +53,12 @@ def query_price_points(
                   AND p.market_id = %s
                   AND DATE(p.ts) BETWEEN %s AND %s
                   AND p.price_type = %s
+                  {unit_filter}
                   {trust_filter}
                 GROUP BY d
                 ORDER BY d
                 """,
-                (fish_id, market_id, start, end, price_type),
+                params,
             )
             rows = cur.fetchall()
     finally:
