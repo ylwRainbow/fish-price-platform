@@ -1,0 +1,137 @@
+fishes:
+  - id: 1
+    code: seabass
+    name: 鲈鱼
+    alias: 海鲈
+    species_code: SB001
+  - id: 2
+    code: loach
+    name: 泥鳅
+    alias: 黄鳝苗
+    species_code: LJ001
+  - id: 3
+    code: grass_carp
+    name: 草鱼
+    alias: 鲩鱼
+    species_code: GC001
+  - id: 4
+    code: silver_carp
+    name: 鲢鱼
+    alias: 白鲢
+    species_code: SC001
+  - id: 5
+    code: yellow_catfish
+    name: 黄颡鱼
+    alias: 汪丁鱼,黄骨鱼,黄辣丁
+    species_code: YC001
+markets:
+  - id: 101
+    code: SH
+    name: 上海农产品中心
+    region_code: 310000
+    source_code: SHNPC
+  - id: 102
+    code: ZJ
+    name: 浙江省综合市场
+    region_code: 330000
+    source_code: ZJMRK
+  - id: 103
+    code: JS_MARKET
+    name: 江苏省综合市场
+    region_code: 320000
+    source_code: JS_MARKET
+  - id: 104
+    code: MZYY
+    name: 民众渔业
+    region_code: 440000
+    source_code: MZYY_WECHAT
+  - id: 201
+    code: FS
+    name: 广东佛山
+    region_code: 440600
+    source_code: SOHU_BASS
+  - id: 202
+    code: HUZHOU_OLD
+    name: 湖州(历史)
+    region_code: 330500
+    source_code: SOHU_BASS
+  - id: 203
+    code: WUJIANG
+    name: 江苏吴江
+    region_code: 320509
+    source_code: SOHU_BASS
+  - id: 204
+    code: CHENGDU
+    name: 四川成都
+    region_code: 510100
+    source_code: SOHU_BASS
+  - id: 205
+    code: HUARONG
+    name: 湖南华容
+    region_code: 430623
+    source_code: SOHU_BASS
+  - id: 206
+    code: WUHAN
+    name: 湖北武汉
+    region_code: 420100
+    source_code: SOHU_BASS
+  - id: 207
+    code: ZHENGZHOU
+    name: 河南郑州
+    region_code: 410100
+    source_code: SOHU_BASS
+sources:
+  - fish_code: seabass
+    market_code: ZJ
+    type: http_html
+    params:
+      list_url: https://www.shuichanq.com/plugin.php?id=xigua_hb&ac=cat&cat_id=395
+      detail_limit: 6
+      fish_keywords: ["加州鲈","鲈鱼"]
+      region_keywords: ["浙江","湖州","杭州"]
+  - fish_code: seabass
+    market_code: JS
+    type: http_html
+    params:
+      list_url: https://www.shuichanq.com/plugin.php?id=xigua_hb&ac=cat&cat_id=395
+      detail_limit: 6
+      fish_keywords: ["加州鲈","鲈鱼"]
+      region_keywords: ["江苏","吴江","苏州"]
+  - fish_code: seabass
+    market_code: SH
+    type: http_html
+    params:
+      list_url: https://www.shuichanq.com/plugin.php?id=xigua_hb&ac=cat&cat_id=395
+      detail_limit: 6
+      fish_keywords: ["海鲈","鲈鱼"]
+      region_keywords: ["上海"]
+  - fish_code: loach
+    market_code: SH
+    type: http_html
+    params:
+      list_url: https://www.shuichanq.com/plugin.php?id=xigua_hb&ac=cat&cat_id=395&keyword=泥鳅
+      detail_limit: 100
+      max_pages: 10
+      fish_keywords: ["泥鳅"]
+      region_keywords: []
+      headless: true
+  - fish_code: grass_carp
+    market_code: MZYY
+    type: wechat_mp
+    params:
+      account_name: "民众渔业"
+      keywords: ["草鱼", "统鲩", "超市鲩", "脆肉鲩", "鱼价", "塘口价", "行情"]
+      max_articles: 50
+      max_pages: 10
+      headless: true
+      timeout: 30000
+  - fish_code: silver_carp
+    market_code: MZYY
+    type: wechat_mp
+    params:
+      account_name: "民众渔业"
+      keywords: ["鲢鱼", "白鲢", "大头鱼", "鱼价", "塘口价", "行情"]
+      max_articles: 50
+      max_pages: 10
+      headless: true
+      timeout: 30000

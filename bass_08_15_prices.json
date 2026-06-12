@@ -1,0 +1,118 @@
+{
+  "success": [
+    {
+      "date": "2024-07-04",
+      "price": 16.5,
+      "url": "https://mp.weixin.qq.com/s/cxhluhRHNuYOTUmp9FrRuA"
+    },
+    {
+      "date": "2024-07-18",
+      "price": 17.5,
+      "url": "https://mp.weixin.qq.com/s/BH4gzHEq-i3bP7rYViK1GQ"
+    },
+    {
+      "date": "2024-08-01",
+      "price": 19.0,
+      "url": "https://mp.weixin.qq.com/s/ZZPU6tIftSJiJJ4nHBK8TA"
+    },
+    {
+      "date": "2024-08-15",
+      "price": 18.5,
+      "url": "https://mp.weixin.qq.com/s/fAI6LYdAHDy_DE9b8-6U7w"
+    },
+    {
+      "date": "2024-08-29",
+      "price": 18.0,
+      "url": "https://mp.weixin.qq.com/s/ivZzlWYYcOD-2HdnG7nreA"
+    },
+    {
+      "date": "2024-09-12",
+      "price": 17.0,
+      "url": "https://mp.weixin.qq.com/s/PcdiEY65LKc7JuoX3ESZZg"
+    },
+    {
+      "date": "2024-09-26",
+      "price": 18.5,
+      "url": "https://mp.weixin.qq.com/s/UZmcRqlXKT4hVgItl93K1A"
+    },
+    {
+      "date": "2024-10-17",
+      "price": 15.0,
+      "url": "https://mp.weixin.qq.com/s/u05NVJmy4caBHkwO4BA2fQ"
+    },
+    {
+      "date": "2024-10-31",
+      "price": 15.0,
+      "url": "https://mp.weixin.qq.com/s/suf3IYqFrtH2n9ZSu6cSFg"
+    },
+    {
+      "date": "2024-11-14",
+      "price": 12.5,
+      "url": "https://mp.weixin.qq.com/s/ZF2fDWCadjuc_MFqiUbJQA"
+    },
+    {
+      "date": "2024-11-28",
+      "price": 14.0,
+      "url": "https://mp.weixin.qq.com/s/UBZbsj2krhjPxjeOu93O0g"
+    },
+    {
+      "date": "2024-12-12",
+      "price": 13.8,
+      "url": "https://mp.weixin.qq.com/s/1ZAP42v4r-PQEW4I9cPZ7A"
+    }
+  ],
+  "failed": [
+    {
+      "url": "https://mp.weixin.qq.com/s/fM8oODHjjwxiEJLs_DQoTA",
+      "error": "文章中未找到加州鲈/鲈鱼相关内容"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/EK7slf8U1mMYQrQnW3WgRw",
+      "error": "文章中未找到加州鲈/鲈鱼相关内容"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/k8WJhvon-XeH64kDemvBew",
+      "error": "文章中未找到加州鲈/鲈鱼相关内容"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/s9D23kip1mKFUFyolNGjwg",
+      "error": "文章中未找到加州鲈/鲈鱼相关内容"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/wEJi1PJ4E63RRMEUxNMVVQ",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/eS7w0jZ5aU2GkLH-rIwkdQ",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/Bs47Rt5dpenQw4hZbcSsjg",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/VV7DwOpJVwK2IUPT63E9FA",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/omWDt_Edij7DTUzW1zegcw",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/Iej6JJj2tFPl4AV5ZSn5vQ",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/edtx1zOD1U2yZwN8JOrOwg",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/d_J8iwXgt2gSGnkhmKYCyw",
+      "error": "无法提取0.8-1.5斤价格"
+    },
+    {
+      "url": "https://mp.weixin.qq.com/s/K88MgPKipedMzLGIBu01Nw",
+      "error": "无法提取0.8-1.5斤价格"
+    }
+  ]
+}

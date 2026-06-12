@@ -1,0 +1,234 @@
+[
+  {
+    "date": "2025-01-02 00:00:00",
+    "price": 13.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/ekCDAxg_bOrb29xJUuAKDw",
+    "publish_date": null,
+    "content_date": "2025-01-02 00:00:00"
+  },
+  {
+    "date": "2025-01-16 00:00:00",
+    "price": 12.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/NPT07xckDfTpDapvCluP3Q",
+    "publish_date": null,
+    "content_date": "2025-01-16 00:00:00"
+  },
+  {
+    "date": "2025-01-27 00:00:00",
+    "price": 12.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/LaxFqxfE88P9S6VYHrhSXA",
+    "publish_date": null,
+    "content_date": "2025-01-27 00:00:00"
+  },
+  {
+    "date": "2025-02-27 00:00:00",
+    "price": 13.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/hwnHOyjGm5JW3AdIVrO2iQ",
+    "publish_date": null,
+    "content_date": "2025-02-27 00:00:00"
+  },
+  {
+    "date": "2025-03-13 00:00:00",
+    "price": 14.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/BRuB2tTqZMMHOoVtESyUEg",
+    "publish_date": null,
+    "content_date": "2025-03-13 00:00:00"
+  },
+  {
+    "date": "2025-03-20 00:00:00",
+    "price": 16.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/b_yHInWTjH9Cm9wcB9_hZQ",
+    "publish_date": null,
+    "content_date": "2025-03-20 00:00:00"
+  },
+  {
+    "date": "2025-04-03 00:00:00",
+    "price": 16.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/DdA15LJKR4NA21o2lSBWWw",
+    "publish_date": null,
+    "content_date": "2025-04-03 00:00:00"
+  },
+  {
+    "date": "2025-04-10 00:00:00",
+    "price": 16.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/maGZJdlfsMkKCxH8m9UhwA",
+    "publish_date": null,
+    "content_date": "2025-04-10 00:00:00"
+  },
+  {
+    "date": "2025-04-24 00:00:00",
+    "price": 16.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/T5CTzxl8wVjaOavkFHpJZQ",
+    "publish_date": null,
+    "content_date": "2025-04-24 00:00:00"
+  },
+  {
+    "date": "2025-05-15 00:00:00",
+    "price": 21.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/0LcUs2ot5DOdJD2vv9sr6g",
+    "publish_date": null,
+    "content_date": "2025-05-15 00:00:00"
+  },
+  {
+    "date": "2025-05-29 00:00:00",
+    "price": 23.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/7s5Vi0csZnj5vu8xaYSyhg",
+    "publish_date": null,
+    "content_date": "2025-05-29 00:00:00"
+  },
+  {
+    "date": "2025-06-12 00:00:00",
+    "price": 18.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/r7i3MiROQbskU372EQsbYA",
+    "publish_date": null,
+    "content_date": "2025-06-12 00:00:00"
+  },
+  {
+    "date": "2025-07-10 00:00:00",
+    "price": 17.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/IK-3rMTw9id6QMbp2jH-iw",
+    "publish_date": null,
+    "content_date": "2025-07-10 00:00:00"
+  },
+  {
+    "date": "2025-07-24 00:00:00",
+    "price": 18.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/GYQ-k-R0ARPwCgnN_nT9Pw",
+    "publish_date": null,
+    "content_date": "2025-07-24 00:00:00"
+  },
+  {
+    "date": "2025-08-07 00:00:00",
+    "price": 17.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/XPiHEEK2BAyFBrUx6eq5Dg",
+    "publish_date": null,
+    "content_date": "2025-08-07 00:00:00"
+  },
+  {
+    "date": "2025-08-14 00:00:00",
+    "price": 17.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/OobWNKJn4aV0hmyrR6BT2A",
+    "publish_date": null,
+    "content_date": "2025-08-14 00:00:00"
+  },
+  {
+    "date": "2025-09-04 00:00:00",
+    "price": 15.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/F-NbWHXZ53rw01ZKMIwKsw",
+    "publish_date": null,
+    "content_date": "2025-09-04 00:00:00"
+  },
+  {
+    "date": "2025-09-18 00:00:00",
+    "price": 14.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/VYwVXVGaRogWaV-ZATdHHA",
+    "publish_date": null,
+    "content_date": "2025-09-18 00:00:00"
+  },
+  {
+    "date": "2025-09-30 00:00:00",
+    "price": 12.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/95NWpTYVgEP5lVOPpXZQ1g",
+    "publish_date": null,
+    "content_date": "2025-09-30 00:00:00"
+  },
+  {
+    "date": "2025-10-16 00:00:00",
+    "price": 11.5,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/uW-G5ouTxXSWJyrQMPtxjQ",
+    "publish_date": null,
+    "content_date": "2025-10-16 00:00:00"
+  },
+  {
+    "date": "2025-10-30 00:00:00",
+    "price": 9.8,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/UecocghH1nVwm7fw_R6KAQ",
+    "publish_date": null,
+    "content_date": "2025-10-30 00:00:00"
+  },
+  {
+    "date": "2025-11-13 00:00:00",
+    "price": 9.6,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/_I8h14O_LRsOdRj1xRmqkA",
+    "publish_date": null,
+    "content_date": "2025-11-13 00:00:00"
+  },
+  {
+    "date": "2025-12-04 00:00:00",
+    "price": 9.8,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/65xq3WwBV5al9NCkXeGg1Q",
+    "publish_date": null,
+    "content_date": "2025-12-04 00:00:00"
+  },
+  {
+    "date": "2025-12-18 00:00:00",
+    "price": 9.2,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/5Mgb7ZgmHfCi9Me63pqwwA",
+    "publish_date": null,
+    "content_date": "2025-12-18 00:00:00"
+  },
+  {
+    "date": "2025-12-31 00:00:00",
+    "price": 9.2,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/QsjUmhtWRsDp1thPzh_lwA",
+    "publish_date": null,
+    "content_date": "2025-12-31 00:00:00"
+  },
+  {
+    "date": "2025-01-15 00:00:00",
+    "price": 9.6,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/9KPcot4cOstI_Yf9jpfFfQ",
+    "publish_date": null,
+    "content_date": "2025-01-15 00:00:00"
+  },
+  {
+    "date": "2025-02-05 00:00:00",
+    "price": 9.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/12j4ii8XXNrFtE60CQOUpg",
+    "publish_date": null,
+    "content_date": "2025-02-05 00:00:00"
+  },
+  {
+    "date": "2025-02-15 00:00:00",
+    "price": 9.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/ToaWMQKRDp8LFNncJUK7Ng",
+    "publish_date": null,
+    "content_date": "2025-02-15 00:00:00"
+  },
+  {
+    "date": "2025-03-05 00:00:00",
+    "price": 8.0,
+    "spec": "0.8-1.5斤",
+    "url": "https://mp.weixin.qq.com/s/upW0NXIFjW5gJQWjL13ckw",
+    "publish_date": null,
+    "content_date": "2025-03-05 00:00:00"
+  }
+]

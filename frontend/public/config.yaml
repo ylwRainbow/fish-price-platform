@@ -1,0 +1,51 @@
+fishes:
+  - id: 1
+    code: seabass
+    name: 鲈鱼
+    alias: 海鲈
+  - id: 2
+    code: loach
+    name: 泥鳅
+    alias: 黄鳝苗
+  - id: 3
+    code: grass_carp
+    name: 草鱼
+    alias: 鲩鱼
+  - id: 4
+    code: silver_carp
+    name: 鲢鱼
+    alias: 白鲢
+markets:
+  - id: 101
+    code: SH
+    name: 上海农产品中心
+  - id: 102
+    code: ZJ
+    name: 浙江省综合市场
+  - id: 103
+    code: HUZHOU
+    name: 浙江湖州
+  - id: 104
+    code: MZYY
+    name: 民众渔业
+  - id: 201
+    code: FS
+    name: 广东佛山
+  - id: 202
+    code: HUZHOU_OLD
+    name: 湖州(历史)
+  - id: 203
+    code: WUJIANG
+    name: 江苏吴江
+  - id: 204
+    code: CHENGDU
+    name: 四川成都
+  - id: 205
+    code: HUARONG
+    name: 湖南华容
+  - id: 206
+    code: WUHAN
+    name: 湖北武汉
+  - id: 207
+    code: ZHENGZHOU
+    name: 河南郑州

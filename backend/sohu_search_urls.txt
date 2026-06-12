@@ -1,0 +1,79 @@
+# 搜狐网历史文章搜索链接
+# 使用方法：逐个点击链接，在 Google 搜索结果中复制搜狐网文章 URL
+# 将复制的 URL 保存到 sohu_known_urls.txt
+
+# 加州鲈 湖州 水产前沿 (2020)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+水产前沿"+after:2020-01-01+before:2020-12-31
+
+# 加州鲈 湖州 水产前沿 (2021)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+水产前沿"+after:2021-01-01+before:2021-12-31
+
+# 加州鲈 湖州 水产前沿 (2022)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+水产前沿"+after:2022-01-01+before:2022-12-31
+
+# 加州鲈 湖州 水产前沿 (2023)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+水产前沿"+after:2023-01-01+before:2023-12-31
+
+# 加州鲈 湖州 水产前沿 (2024)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+水产前沿"+after:2024-01-01+before:2024-12-31
+
+# 加州鲈 湖州 杰大饲料 (2020)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+杰大饲料"+after:2020-01-01+before:2020-12-31
+
+# 加州鲈 湖州 杰大饲料 (2021)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+杰大饲料"+after:2021-01-01+before:2021-12-31
+
+# 加州鲈 湖州 杰大饲料 (2022)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+杰大饲料"+after:2022-01-01+before:2022-12-31
+
+# 加州鲈 湖州 杰大饲料 (2023)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+杰大饲料"+after:2023-01-01+before:2023-12-31
+
+# 加州鲈 湖州 杰大饲料 (2024)
+https://www.google.com/search?q=site:sohu.com+"加州鲈+湖州+杰大饲料"+after:2024-01-01+before:2024-12-31
+
+# 鲈鱼价格 湖州 (2020)
+https://www.google.com/search?q=site:sohu.com+"鲈鱼价格+湖州"+after:2020-01-01+before:2020-12-31
+
+# 鲈鱼价格 湖州 (2021)
+https://www.google.com/search?q=site:sohu.com+"鲈鱼价格+湖州"+after:2021-01-01+before:2021-12-31
+
+# 鲈鱼价格 湖州 (2022)
+https://www.google.com/search?q=site:sohu.com+"鲈鱼价格+湖州"+after:2022-01-01+before:2022-12-31
+
+# 鲈鱼价格 湖州 (2023)
+https://www.google.com/search?q=site:sohu.com+"鲈鱼价格+湖州"+after:2023-01-01+before:2023-12-31
+
+# 鲈鱼价格 湖州 (2024)
+https://www.google.com/search?q=site:sohu.com+"鲈鱼价格+湖州"+after:2024-01-01+before:2024-12-31
+
+# 浙江湖州 加州鲈 (2020)
+https://www.google.com/search?q=site:sohu.com+"浙江湖州+加州鲈"+after:2020-01-01+before:2020-12-31
+
+# 浙江湖州 加州鲈 (2021)
+https://www.google.com/search?q=site:sohu.com+"浙江湖州+加州鲈"+after:2021-01-01+before:2021-12-31
+
+# 浙江湖州 加州鲈 (2022)
+https://www.google.com/search?q=site:sohu.com+"浙江湖州+加州鲈"+after:2022-01-01+before:2022-12-31
+
+# 浙江湖州 加州鲈 (2023)
+https://www.google.com/search?q=site:sohu.com+"浙江湖州+加州鲈"+after:2023-01-01+before:2023-12-31
+
+# 浙江湖州 加州鲈 (2024)
+https://www.google.com/search?q=site:sohu.com+"浙江湖州+加州鲈"+after:2024-01-01+before:2024-12-31
+
+# 水产前沿 周报 湖州 (2020)
+https://www.google.com/search?q=site:sohu.com+"水产前沿+周报+湖州"+after:2020-01-01+before:2020-12-31
+
+# 水产前沿 周报 湖州 (2021)
+https://www.google.com/search?q=site:sohu.com+"水产前沿+周报+湖州"+after:2021-01-01+before:2021-12-31
+
+# 水产前沿 周报 湖州 (2022)
+https://www.google.com/search?q=site:sohu.com+"水产前沿+周报+湖州"+after:2022-01-01+before:2022-12-31
+
+# 水产前沿 周报 湖州 (2023)
+https://www.google.com/search?q=site:sohu.com+"水产前沿+周报+湖州"+after:2023-01-01+before:2023-12-31
+
+# 水产前沿 周报 湖州 (2024)
+https://www.google.com/search?q=site:sohu.com+"水产前沿+周报+湖州"+after:2024-01-01+before:2024-12-31
+

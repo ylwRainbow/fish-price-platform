@@ -1,0 +1,13 @@
+.worktrees/
+.DS_Store
+.trae/
+.env
+*.env
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+test_reports/

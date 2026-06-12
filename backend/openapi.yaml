@@ -1,0 +1,154 @@
+openapi: 3.0.3
+info:
+  title: 鱼价数据平台 API
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/fishes:
+    get:
+      summary: 列出鱼种
+      parameters:
+        - in: query
+          name: q
+          schema:
+            type: string
+          description: 按名称模糊搜索
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Fish'
+  /api/markets:
+    get:
+      summary: 列出市场
+      parameters:
+        - in: query
+          name: region_code
+          schema:
+            type: string
+          description: 区域筛选
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Market'
+  /api/prices:
+    get:
+      summary: 查询价格时序
+      parameters:
+        - in: query
+          name: fish_id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: market_id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: start
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: end
+          schema:
+            type: string
+            format: date-time
+        - in: query
+          name: granularity
+          schema:
+            type: string
+            enum: [day, week, month]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TimeSeriesResponse'
+  /api/forecast:
+    get:
+      summary: 查询预测
+      parameters:
+        - in: query
+          name: fish_id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: market_id
+          required: true
+          schema:
+            type: integer
+        - in: query
+          name: horizon
+          schema:
+            type: integer
+            default: 14
+            description: 预测天数
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForecastResponse'
+components:
+  schemas:
+    Fish:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        alias: { type: string }
+        species_code: { type: string }
+    Market:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        region_code: { type: string }
+        source_code: { type: string }
+    PricePoint:
+      type: object
+      properties:
+        ts: { type: string, format: date-time }
+        price: { type: number }
+        currency: { type: string }
+        unit: { type: string }
+    TimeSeriesResponse:
+      type: object
+      properties:
+        fish: { $ref: '#/components/schemas/Fish' }
+        market: { $ref: '#/components/schemas/Market' }
+        points:
+          type: array
+          items: { $ref: '#/components/schemas/PricePoint' }
+    ForecastPoint:
+      type: object
+      properties:
+        date: { type: string, format: date }
+        price: { type: number }
+        lower: { type: number }
+        upper: { type: number }
+    ForecastResponse:
+      type: object
+      properties:
+        fish: { $ref: '#/components/schemas/Fish' }
+        market: { $ref: '#/components/schemas/Market' }
+        horizon: { type: integer }
+        model: { type: string }
+        points:
+          type: array
+          items: { $ref: '#/components/schemas/ForecastPoint' }
