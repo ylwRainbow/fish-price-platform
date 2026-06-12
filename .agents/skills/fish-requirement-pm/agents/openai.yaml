@@ -1,0 +1,4 @@
+interface:
+  display_name: "Fish Requirement PM"
+  short_description: "Clarify fish platform requirements before implementation."
+  default_prompt: "Use this skill to clarify a fish-price-platform requirement as a senior product manager before coding."
