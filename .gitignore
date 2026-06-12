@@ -1,6 +1,7 @@
 .worktrees/
 .DS_Store
 .trae/
+.idea/
 .env
 *.env
 node_modules/
